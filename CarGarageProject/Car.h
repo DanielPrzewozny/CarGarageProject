@@ -2,21 +2,18 @@
 #include "conio.h"
 #include <iostream>
 #include <chrono>
-#include <ctime>  
+#include <ctime>
 #include <string>
 #include <vector>
 #include <list>
 using namespace std;
 
-namespace CarProject {
+namespace CarProject
+{
 	class Car
 	{
-
-	private:
-
-
-	public:
-		bool isRunning;
+		public:
+			bool isRunning;
 		bool isMoving;
 		string _make;
 		string _model;
@@ -26,8 +23,9 @@ namespace CarProject {
 		float _acceleration = 0;
 
 		Car() {};
-
-		Car(string make, string model, int year, float power, float weight, float acceleration) {
+		Car(string make, string model, int year, float power, float weight,
+			float acceleration)
+		{
 			_make = make;
 			_model = model;
 			_year = year;
@@ -36,46 +34,14 @@ namespace CarProject {
 			_acceleration = acceleration;
 		}
 
-
-		//		#region ListOfCars
-
-		void static ListOfCars(list<Car>& cars);
-		//		#endregion
-
-		//		#region ChoseCar
+		void static ListOfCars(list<Car> &cars);
 		int static ChoseCar();
-		//		#endregion
-
-				//Navigation
-		//		#region OnTheStreet 
-		void static OnTheStreet(int carNum, list<Car>& cars);
-		//		#endregion 
-
-		//		#region StartEngine
+		void static OnTheStreet(int carNum, list<Car> &cars);
 		void static StartEngine();
-		//		#endregion
-
-		//		#region StopEngine
 		void static StopEngine();
-		//		#endregion
-
-		//		#region Move
 		void static Move();
-		//		#endregion
-
-		//		#region Stop
 		void static Stop();
-		//		#endregion
-
-		//		#region TheFastest
-		template<typename T>
-		int static TheFastest(const T& Input);
-		//		#endregion
-
-		//		#region Log
-		void static Log(const char* input);
-		//		#endregion
-
+		template < typename T > int static TheFastest(const T &Input);
+		void static Log(const char *input);
 	};
-
 }
