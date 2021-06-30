@@ -8,7 +8,10 @@
 using namespace std;
 using namespace std::chrono;
 
+
+
 namespace CarProject {
+	Car cars;
 	void Car::ListOfCars(list < Car >& cars) {
 		DrawTable::tableWidth = 100;
 		DrawTable::PrintLine();
@@ -64,8 +67,9 @@ namespace CarProject {
 		DrawTable::tableWidth = 77;
 		DrawTable::PrintLine();
 
-		char info;
+		char info = '\0';
 		do {
+			info = '\0';
 			info = _getch();
 			if (info == 'e') {
 				Car::StartEngine();
@@ -90,18 +94,18 @@ namespace CarProject {
 	}
 
 	void Car::StartEngine() {
-		Car cars;
+	
 		if (!cars.isRunning && !cars.isMoving) {
 			cars.isRunning = cars.isRunning ? false : true;
 			Log(" - Uruchomiono silnik");
 		}
 		else {
-			Log(" - Silnik zostal juz wczeœniej uruchomiony");
+			Log(" - Silnik zostal juz wczesniej uruchomiony");
 		}
 	}
 
 	void Car::StopEngine() {
-		Car cars;
+		
 		if (cars.isRunning && !cars.isMoving) {
 			cars.isRunning = cars.isRunning ? false : true;
 			Log(" - Wylaczono silnik");
@@ -115,18 +119,17 @@ namespace CarProject {
 	}
 
 	void Car::Move() {
-		Car cars;
+		
 		if (!cars.isMoving && cars.isRunning) {
 			cars.isMoving = cars.isMoving ? false : true;
 			Log(" - Samochod jest w ruchu");
 		}
-		else if (cars.isMoving && cars.isRunning) {
-			Log(" - Samochod jest w ruchu");
-		}
+		else if (cars.isMoving && cars.isRunning) Log(" - Samochod jest w ruchu");
+		else if (!cars.isRunning) Log(" - W pierwszej kolejnosci uruchom silnik");
 	}
 
 	void Car::Stop() {
-		Car cars;
+	
 		if (cars.isMoving) {
 			cars.isMoving = cars.isMoving ? false : true;
 			Car::Log(" - Samochod zatrzymal sie");
@@ -141,7 +144,11 @@ namespace CarProject {
 		struct tm* timeinfo;
 		time(&current_time);
 		timeinfo = localtime(&current_time);
-		string event[] = { asctime(timeinfo) };
+
+		char output[10];
+		strftime(output, 10, "%H:%M:%S", timeinfo);
+
+		string event[] = { output };
 
 		DrawTable::tableWidth = 15;
 		DrawTable::PrintRow(false, event, 1);
