@@ -12,7 +12,7 @@ namespace CarProject
 	public:
 		static int tableWidth;
 		static void PrintLine();
-		static void PrintRow(bool newline, string* columns);
+		static void PrintRow(bool newline, string* columns, int numElem);
 
 		static string AlignCentre(string text, int width);
 	};

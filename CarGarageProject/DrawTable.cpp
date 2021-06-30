@@ -1,40 +1,41 @@
 #include <iostream>
+#include <iomanip>
 #include <string>
 #include <list>
+#include <algorithm>
 #include "DrawTable.h"
 using namespace std;
 
 namespace CarProject {
-int DrawTable::tableWidth = 0;
+int DrawTable::tableWidth;
 void DrawTable::PrintLine() {
-  char prev = cout.fill('-');
-  cout.width(DrawTable::tableWidth);
-  cout << '\n';
+  cout << string(DrawTable::tableWidth, '-') << "\n";
 }
 
-void DrawTable::PrintRow(bool newline, string *columns) {
-  int width = (DrawTable::tableWidth - sizeof(columns)) / sizeof(columns);
+void DrawTable::PrintRow(bool newline, string *columns, int numElem) {
+
+  int width = (DrawTable::tableWidth - numElem) / numElem;
   string row = "|";
 
-  for (unsigned int a = 0; a < sizeof(columns); a = a + 1) {
-    row += DrawTable::AlignCentre(columns[a], width);
+  for (unsigned int a = 0; a < numElem; a = a + 1) {
+    row.append(DrawTable::AlignCentre(columns[a], width) + "|");
   }
+
   if (newline) {
-    cout << row << std::endl;
+    cout << row << endl;
   } else {
     cout << row;
   }
 }
 
 string DrawTable::AlignCentre(string text, int width) {
-  text = text.length() > width ? text.substr(0, width - 3) + "..." : text;
+    text = text.length() > width ? text.substr(0, width - 3) + "..." : text;
+    int len = text.length();
+    if (width < len) { return text; }
 
-  if (text.empty()) {
-    return string(width, ' ');
-  } else {
-    int pad1 = width - (width - text.length()) / 2;
-    int pad2 = width;
+    int diff = width - len;
+    int pad1 = diff / 2;
+    int pad2 = diff - pad1;
     return string(pad1, ' ') + text + string(pad2, ' ');
-  }
 }
 }
