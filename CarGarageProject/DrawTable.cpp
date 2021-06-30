@@ -1,14 +1,12 @@
 #include <iostream>
 #include <string>
-#include<list>
+#include <list>
 #include "DrawTable.h"
 using namespace std;
 
 namespace CarProject
 {
-
 	int DrawTable::tableWidth = 0;
-
 	void DrawTable::PrintLine()
 	{
 		char prev = cout.fill('-');
@@ -16,7 +14,7 @@ namespace CarProject
 		cout << '\n';
 	}
 
-	void DrawTable::PrintRow(bool newline, string* columns)
+	void DrawTable::PrintRow(bool newline, string *columns)
 	{
 		int width = (DrawTable::tableWidth - sizeof(columns)) / sizeof(columns);
 		string row = "|";
@@ -26,7 +24,6 @@ namespace CarProject
 			row += DrawTable::AlignCentre(columns[a], width);
 		}
 
-
 		if (newline)
 		{
 			cout << row << std::endl;
@@ -35,7 +32,6 @@ namespace CarProject
 		{
 			cout << row;
 		}
-
 	}
 
 	string DrawTable::AlignCentre(string text, int width)
