@@ -5,9 +5,6 @@
 using namespace std;
 using namespace CarProject;
 
-template <class InputIterator, class Function>
-Function for_each(InputIterator first, InputIterator last, Function fn);
-
 int main()
 {
     list<Car> cars = { {"fso", "polonez caro", 1995, 103.0f, 113.0f, 13.8f},
