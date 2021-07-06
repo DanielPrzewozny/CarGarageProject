@@ -8,8 +8,6 @@
 using namespace std;
 using namespace std::chrono;
 
-
-
 namespace CarProject {
 	Car cars;
 	void Car::ListOfCars(list < Car >& cars) {
@@ -36,7 +34,6 @@ namespace CarProject {
 		DrawTable::PrintRow(true, rowss, 7);
 		DrawTable::PrintLine();
 	}
-
 	int Car::ChoseCar() {
 		int carNum = 0;
 		wcout << "\n\nWybierz samochod: " << endl;
@@ -46,7 +43,6 @@ namespace CarProject {
 		carNum = carNum - 1;
 		return carNum;
 	}
-
 	void Car::OnTheStreet(int carNum, list < Car >& cars) {
 		vector<Car> result(cars.begin(), cars.end());
 		cout << "\nWybrano : " << result[carNum]._make << " " << result[carNum]._model << " z " << result[carNum]._year << endl;
@@ -92,9 +88,7 @@ namespace CarProject {
 			}
 		} while (info != 27);
 	}
-
 	void Car::StartEngine() {
-	
 		if (!cars.isRunning && !cars.isMoving) {
 			cars.isRunning = cars.isRunning ? false : true;
 			Log(" - Uruchomiono silnik");
@@ -103,9 +97,7 @@ namespace CarProject {
 			Log(" - Silnik zostal juz wczesniej uruchomiony");
 		}
 	}
-
 	void Car::StopEngine() {
-		
 		if (cars.isRunning && !cars.isMoving) {
 			cars.isRunning = cars.isRunning ? false : true;
 			Log(" - Wylaczono silnik");
@@ -117,9 +109,7 @@ namespace CarProject {
 			Log(" - Silnik zostal juz wczesniej wylaczony");
 		}
 	}
-
 	void Car::Move() {
-		
 		if (!cars.isMoving && cars.isRunning) {
 			cars.isMoving = cars.isMoving ? false : true;
 			Log(" - Samochod jest w ruchu");
@@ -127,9 +117,7 @@ namespace CarProject {
 		else if (cars.isMoving && cars.isRunning) Log(" - Samochod jest w ruchu");
 		else if (!cars.isRunning) Log(" - W pierwszej kolejnosci uruchom silnik");
 	}
-
 	void Car::Stop() {
-	
 		if (cars.isMoving) {
 			cars.isMoving = cars.isMoving ? false : true;
 			Car::Log(" - Samochod zatrzymal sie");
@@ -138,18 +126,14 @@ namespace CarProject {
 			Car::Log(" - Samochod zatrzymal sie juz wczesniej i stoi w miejscu");
 		}
 	}
-
 	void Car::Log(const char* input) {
 		time_t current_time;
 		struct tm* timeinfo;
 		time(&current_time);
 		timeinfo = localtime(&current_time);
-
 		char output[10];
 		strftime(output, 10, "%H:%M:%S", timeinfo);
-
 		string event[] = { output };
-
 		DrawTable::tableWidth = 15;
 		DrawTable::PrintRow(false, event, 1);
 		DrawTable::tableWidth = 60;
